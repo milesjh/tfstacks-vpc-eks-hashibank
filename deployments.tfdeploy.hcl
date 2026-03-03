@@ -50,35 +50,35 @@ deployment "development" {
   }
 }
 
-deployment "production" {
-  inputs = {
-    aws_identity_token = identity_token.aws.jwt
-    role_arn           = local.role_arn
-    regions            = ["us-west-2", "us-east-1"]
-    vpc_name           = "vpc-prod1"
-    vpc_cidr           = "10.20.0.0/16"
+# deployment "production" {
+#   inputs = {
+#     aws_identity_token = identity_token.aws.jwt
+#     role_arn           = local.role_arn
+#     regions            = ["us-west-2", "us-east-1"]
+#     vpc_name           = "vpc-prod1"
+#     vpc_cidr           = "10.20.0.0/16"
 
-    #EKS Cluster
-    kubernetes_version = "1.30"
-    cluster_name       = "eksprod01"
+#     #EKS Cluster
+#     kubernetes_version = "1.30"
+#     cluster_name       = "eksprod01"
 
-    #EKS OIDC
-    tfc_kubernetes_audience   = local.tfc_kubernetes_audience
-    tfc_hostname              = local.tfc_hostname
-    tfc_organization_name     = local.organization_name
-    eks_clusteradmin_arn      = local.eks_clusteradmin_arn
-    eks_clusteradmin_username = local.eks_clusteradmin_username
+#     #EKS OIDC
+#     tfc_kubernetes_audience   = local.tfc_kubernetes_audience
+#     tfc_hostname              = local.tfc_hostname
+#     tfc_organization_name     = local.organization_name
+#     eks_clusteradmin_arn      = local.eks_clusteradmin_arn
+#     eks_clusteradmin_username = local.eks_clusteradmin_username
 
-    #K8S
-    k8s_identity_token = identity_token.k8s.jwt
-    namespace          = "hashibank"
-    deployment_name    = "production"
+#     #K8S
+#     k8s_identity_token = identity_token.k8s.jwt
+#     namespace          = "hashibank"
+#     deployment_name    = "production"
 
-    #HCP
-    hcp_client_id     = store.varset.hcp_creds.HCP_CLIENT_ID
-    hcp_client_secret = store.varset.hcp_creds.HCP_CLIENT_SECRET
-  }
-}
+#     #HCP
+#     hcp_client_id     = store.varset.hcp_creds.HCP_CLIENT_ID
+#     hcp_client_secret = store.varset.hcp_creds.HCP_CLIENT_SECRET
+#   }
+# }
 
 deployment "disaster-recovery" {
   inputs = {
